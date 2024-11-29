@@ -1,11 +1,18 @@
 # Dashboard Project
 
-A full-stack dashboard application with React frontend and Node.js backend.
+A comprehensive full-stack dashboard application featuring a **React.js frontend** and **Node.js backend**. This project is designed for efficient data visualization and user interaction, with features like responsive charts, user stats, and revenue tracking.
 
-## Project Structure
+---
 
-- `/client` - React frontend application
-- `/server` - Node.js backend application
+## Features
+
+- **Interactive Dashboard:** Visualize data using responsive charts and tables.
+- **User Authentication:** Secure login/logout functionality.
+- **Dynamic Data Visualization:** Includes bar charts, pie charts, and detailed statistics.
+- **Responsive Design:** Ensures optimal performance on various devices.
+- **Scalable Architecture:** Organized client-server structure for easy maintenance.
+
+---
 
 ## Prerequisites
 
