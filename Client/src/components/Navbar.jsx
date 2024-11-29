@@ -1,8 +1,10 @@
 import { Layout, Menu, Button, Avatar, Dropdown } from "antd";
-import { Link,  useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { darkTheme } from "../theme/colors";
 import { useUser } from "../hooks/useUser";
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined, MenuOutlined } from "@ant-design/icons";
+import { useState } from "react";
+//responsiveness
 
 const { Header } = Layout;
 
@@ -14,6 +16,7 @@ const Navbar = () => {
   const location = useLocation();
   const { user, logout } = useUser();
   const navigate = useNavigate();
+  const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
 
   const userMenuItems = [
     {
@@ -26,18 +29,12 @@ const Navbar = () => {
     },
   ];
 
-  const menuItems = [
-    {
-      label: <Link to="/dashboard">Dashboard</Link>,
-      key: "/dashboard",
-    },
-  ];
 
   return (
     <Header
       style={{
         background: darkTheme.secondary,
-        padding: "0 24px",
+        padding: "0 16px",
         position: "sticky",
         top: 0,
         zIndex: 1000,
@@ -50,6 +47,7 @@ const Navbar = () => {
     >
       <Link
         to={user ? "/dashboard" : "/"}
+        className="dashboard-link"
         style={{
           display: "flex",
           alignItems: "center",
@@ -68,26 +66,39 @@ const Navbar = () => {
         </div>
       </Link>
 
+      <Button
+        className="mobile-menu-button"
+        icon={<MenuOutlined />}
+        onClick={() => setMobileMenuVisible(!mobileMenuVisible)}
+        style={{
+          display: "none",
+          "@media (max-width: 768px)": {
+            display: "none",
+          },
+        }}
+      />
+
       <div
         style={{
           display: "flex",
           alignItems: "center",
           gap: "24px",
+          "@media (max-width: 768px)": {
+            display: mobileMenuVisible ? "flex" : "none",
+            position: "absolute",
+            top: "64px",
+            left: 0,
+            right: 0,
+            flexDirection: "column",
+            background: darkTheme.secondary,
+            padding: "16px",
+            gap: "16px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+          },
         }}
       >
         {user ? (
           <>
-            <Menu
-              mode="horizontal"
-              selectedKeys={[location.pathname]}
-              items={menuItems}
-              style={{
-                background: "transparent",
-                border: "none",
-                minWidth: "120px",
-              }}
-              theme="dark"
-            />
             <Dropdown
               menu={{ items: userMenuItems }}
               placement="bottomRight"
