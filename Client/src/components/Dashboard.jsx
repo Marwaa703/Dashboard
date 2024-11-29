@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { Card, Row, Col, Button, Spin, Typography } from "antd";
+import { Card, Row, Col, Spin, Typography } from "antd";
 import { useUser } from "../hooks/useUser.js";
-import { useNavigate } from "react-router-dom";
 import { getData } from "../utils/data.js";
 import {
   BarChart,
@@ -30,8 +29,8 @@ const { Title } = Typography;
  * Requires user authentication to view.
  */
 const Dashboard = () => {
-  const { user, logout } = useUser();
-  const navigate = useNavigate();
+  const { user } = useUser();
+
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -56,29 +55,23 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  /**
-   * Handles user logout and redirects to login page.
-   */
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
-
   if (!user) {
     return (
-      <div style={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: darkTheme.primary,
-        color: darkTheme.text.primary,
-        fontSize: "1.2rem",
-        fontWeight: 500,
-        padding: "20px",
-        textAlign: "center",
-        borderRadius: "8px"
-      }}>
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: darkTheme.primary,
+          color: darkTheme.text.primary,
+          fontSize: "1.2rem",
+          fontWeight: 500,
+          padding: "20px",
+          textAlign: "center",
+          borderRadius: "8px",
+        }}
+      >
         Please log in to view your dashboard.
       </div>
     );
@@ -112,11 +105,13 @@ const Dashboard = () => {
     : [];
 
   return (
-    <div style={{ 
-      padding: "24px", 
-      backgroundColor: darkTheme.primary, 
-      minHeight: "100vh" 
-    }}>
+    <div
+      style={{
+        padding: "24px",
+        backgroundColor: darkTheme.primary,
+        minHeight: "100vh",
+      }}
+    >
       <Row gutter={[24, 24]}>
         <Col span={24}>
           <Card
@@ -129,38 +124,27 @@ const Dashboard = () => {
             style={{
               backgroundColor: darkTheme.secondary,
               borderRadius: "12px",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             }}
             headStyle={{
               backgroundColor: darkTheme.secondary,
-              borderBottom: `1px solid ${darkTheme.border}`
+              borderBottom: `1px solid ${darkTheme.border}`,
             }}
           >
             <Row justify="space-between" align="middle">
               <Col>
-                <Title level={4} style={{ color: darkTheme.text.primary, margin: 0 }}>
+                <Title
+                  level={4}
+                  style={{
+                    color: darkTheme.text.primary,
+                    margin: 0,
+                    textAlign: "center",
+                  }}
+                >
                   Hello, {user.name}!
                 </Title>
               </Col>
-              <Col>
-                <Button 
-                  type="default" 
-                  onClick={handleLogout}
-                  style={{
-                    backgroundColor: darkTheme.accent,
-                    color: darkTheme.text.primary,
-                    border: "none",
-                    borderRadius: "6px",
-                    padding: "4px 16px",
-                    height: "auto"
-                  }}
-                  hover={{
-                    backgroundColor: darkTheme.accent + "dd"
-                  }}
-                >
-                  Logout
-                </Button>
-              </Col>
+              <Col></Col>
             </Row>
           </Card>
         </Col>
@@ -175,11 +159,11 @@ const Dashboard = () => {
             style={{
               backgroundColor: darkTheme.secondary,
               borderRadius: "12px",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             }}
             headStyle={{
               backgroundColor: darkTheme.secondary,
-              borderBottom: `1px solid ${darkTheme.border}`
+              borderBottom: `1px solid ${darkTheme.border}`,
             }}
           >
             <Row>
@@ -206,11 +190,13 @@ const Dashboard = () => {
                 </PieResponsiveContainer>
               </Col>
             </Row>
-            <Row style={{ 
-              marginTop: "16px",
-              color: darkTheme.text.secondary,
-              fontSize: "0.9rem"
-            }}>
+            <Row
+              style={{
+                marginTop: "16px",
+                color: darkTheme.text.secondary,
+                fontSize: "0.9rem",
+              }}
+            >
               <Col span={12}>
                 Total Users: {dashboardData?.userStats?.totalUsers}
               </Col>
@@ -225,63 +211,65 @@ const Dashboard = () => {
         <Col xs={24} sm={12} lg={8}>
           <Card
             title={
-              <span style={{ color: darkTheme.text.primary }}>Revenue Stats</span>
+              <span style={{ color: darkTheme.text.primary }}>
+                Revenue Stats
+              </span>
             }
             bordered={false}
             hoverable
             style={{
               backgroundColor: darkTheme.secondary,
               borderRadius: "12px",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             }}
             headStyle={{
               backgroundColor: darkTheme.secondary,
-              borderBottom: `1px solid ${darkTheme.border}`
+              borderBottom: `1px solid ${darkTheme.border}`,
             }}
           >
-            <div style={{ width: '100%', height: '300px' }}>
+            <div style={{ width: "100%", height: "300px" }}>
               <ResponsiveContainer>
                 <BarChart data={revenueData}>
                   <CartesianGrid
                     strokeDasharray="3 3"
                     stroke={darkTheme.border}
                   />
-                  <XAxis 
-                    dataKey="name" 
+                  <XAxis
+                    dataKey="name"
                     stroke={darkTheme.text.secondary}
                     tick={{ fill: darkTheme.text.secondary }}
                   />
-                  <YAxis 
+                  <YAxis
                     stroke={darkTheme.text.secondary}
                     tick={{ fill: darkTheme.text.secondary }}
                   />
                   <Tooltip
-                    contentStyle={{ 
+                    contentStyle={{
                       backgroundColor: darkTheme.secondary,
                       border: `1px solid ${darkTheme.border}`,
-                      borderRadius: '4px'
+                      borderRadius: "4px",
                     }}
                     labelStyle={{ color: darkTheme.text.primary }}
                     itemStyle={{ color: darkTheme.text.secondary }}
                   />
-                  <Legend 
-                    wrapperStyle={{ 
-                      color: darkTheme.text.secondary 
+                  <Legend
+                    wrapperStyle={{
+                      color: darkTheme.text.secondary,
                     }}
                   />
-                  <Bar 
-                    dataKey="revenue" 
+                  <Bar
+                    dataKey="revenue"
                     fill={darkTheme.accent}
                     radius={[4, 4, 0, 0]}
                   />
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            <Row 
-              style={{ 
+            <Row
+              style={{
                 marginTop: "16px",
                 color: darkTheme.text.secondary,
-                fontSize: "0.9rem"
+                fontSize: "0.9rem",
               }}
             >
               <Col span={12}>
@@ -311,32 +299,36 @@ const Dashboard = () => {
         <Col span={24}>
           <Card
             title={
-              <span style={{ color: darkTheme.text.primary }}>Recent Orders</span>
+              <span style={{ color: darkTheme.text.primary }}>
+                Recent Orders
+              </span>
             }
             bordered={false}
             hoverable
             style={{
               backgroundColor: darkTheme.secondary,
               borderRadius: "12px",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             }}
             headStyle={{
               backgroundColor: darkTheme.secondary,
-              borderBottom: `1px solid ${darkTheme.border}`
+              borderBottom: `1px solid ${darkTheme.border}`,
             }}
           >
-            <ul style={{ 
-              listStyle: "none", 
-              padding: 0,
-              color: darkTheme.text.secondary 
-            }}>
+            <ul
+              style={{
+                listStyle: "none",
+                padding: 0,
+                color: darkTheme.text.secondary,
+              }}
+            >
               {dashboardData?.recentOrders?.map((order) => (
-                <li 
+                <li
                   key={order.id}
                   style={{
                     padding: "12px",
                     borderBottom: `1px solid ${darkTheme.border}`,
-                    fontSize: "0.9rem"
+                    fontSize: "0.9rem",
                   }}
                 >
                   Order ID: {order.id} | Customer: {order.customer} | Product:{" "}

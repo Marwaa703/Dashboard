@@ -10,5 +10,11 @@
     "name": "usertwo",
     "email": "usertwo@gmail.com",
     "password": "$2b$10$O0F1PMbwOJRDsOlsR4IZ/.l7y2ePBxE1i5b.Imw0/Ca3psHi/rHLu"
+  },
+  {
+    "id": "1732850174127",
+    "name": "marwatwo",
+    "email": "marwatwo@gmail.com",
+    "password": "$2b$10$RI4S2n/cyLw1XfiffCvuhuV1XlnrKLn0OWiPDHMaKBy9ZEAdQMpqW"
   }
 ]
