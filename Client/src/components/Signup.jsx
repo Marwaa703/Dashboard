@@ -41,7 +41,7 @@ const Signup = () => {
 
   return (
     <div className="signup-form-container">
-      <h2>Signup</h2>
+      <h2 style={{textAlign:"center"}}>Signup</h2>
       <Form name="signup" onFinish={onFinish} layout="vertical">
         <Form.Item
           label="Name"

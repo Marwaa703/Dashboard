@@ -37,12 +37,62 @@ const Login = () => {
   };
 
   if (user) {
-    return <div>You are already logged in...</div>;
+    return (
+      <div style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: darkTheme.primary,
+        color: darkTheme.text.primary,
+        flexDirection: "column",
+        gap: "20px"
+      }}>
+        <div style={{
+          backgroundColor: darkTheme.secondary,
+          padding: "32px 48px",
+          borderRadius: "12px",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px",
+          minWidth: "300px"
+        }}>
+          <div style={{
+            fontSize: "1.2rem",
+            fontWeight: "500",
+            color: darkTheme.text.primary,
+            marginBottom: "8px"
+          }}>
+            You are already logged in...
+          </div>
+          
+          <Button 
+            type="primary"
+            onClick={() => navigate('/dashboard')}
+            style={{
+              backgroundColor: darkTheme.accent,
+              border: "none",
+              height: "40px",
+              borderRadius: "6px",
+              fontSize: "1rem",
+              fontWeight: "500"
+            }}
+            hover={{
+              backgroundColor: `${darkTheme.accent}dd`
+            }}
+          >
+            Go to Dashboard
+          </Button>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="login-form-container">
-      <h2 style={{ color: darkTheme.text.primary }}>Login</h2>
+      <h2 style={{ color: darkTheme.text.primary , textAlign:"center" }}>Welcome Back</h2>
       <Form name="login" onFinish={onFinish} layout="vertical">
         <Form.Item
           label="Email"

@@ -20,7 +20,7 @@ import {
   Tooltip as PieTooltip,
   ResponsiveContainer as PieResponsiveContainer,
 } from "recharts";
-import { darkTheme } from '../theme/colors';
+import { darkTheme } from "../theme/colors";
 
 const { Title } = Typography;
 
@@ -65,7 +65,23 @@ const Dashboard = () => {
   };
 
   if (!user) {
-    return <div>Please log in to view your dashboard.</div>;
+    return (
+      <div style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: darkTheme.primary,
+        color: darkTheme.text.primary,
+        fontSize: "1.2rem",
+        fontWeight: 500,
+        padding: "20px",
+        textAlign: "center",
+        borderRadius: "8px"
+      }}>
+        Please log in to view your dashboard.
+      </div>
+    );
   }
 
   if (loading) {
@@ -96,36 +112,75 @@ const Dashboard = () => {
     : [];
 
   return (
-    <div style={{ padding: "20px", backgroundColor: darkTheme.primary }}>
-      <Row gutter={[16, 16]}>
+    <div style={{ 
+      padding: "24px", 
+      backgroundColor: darkTheme.primary, 
+      minHeight: "100vh" 
+    }}>
+      <Row gutter={[24, 24]}>
         <Col span={24}>
-          <Card 
-            title="Welcome to the Dashboard" 
+          <Card
+            title={
+              <span style={{ color: darkTheme.text.primary }}>
+                Welcome to the Dashboard
+              </span>
+            }
             bordered={false}
-            style={{ backgroundColor: darkTheme.secondary }}
+            style={{
+              backgroundColor: darkTheme.secondary,
+              borderRadius: "12px",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
+            }}
+            headStyle={{
+              backgroundColor: darkTheme.secondary,
+              borderBottom: `1px solid ${darkTheme.border}`
+            }}
           >
             <Row justify="space-between" align="middle">
               <Col>
-                <Title level={4}>Hello, {user.name}!</Title>
+                <Title level={4} style={{ color: darkTheme.text.primary, margin: 0 }}>
+                  Hello, {user.name}!
+                </Title>
               </Col>
               <Col>
-                <Button type="default" onClick={handleLogout}>
+                <Button 
+                  type="default" 
+                  onClick={handleLogout}
+                  style={{
+                    backgroundColor: darkTheme.accent,
+                    color: darkTheme.text.primary,
+                    border: "none",
+                    borderRadius: "6px",
+                    padding: "4px 16px",
+                    height: "auto"
+                  }}
+                  hover={{
+                    backgroundColor: darkTheme.accent + "dd"
+                  }}
+                >
                   Logout
                 </Button>
               </Col>
             </Row>
           </Card>
         </Col>
-      </Row>
 
-      <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
-        {/* User Stats Card with Pie Chart */}
         <Col xs={24} sm={12} lg={8}>
-          <Card 
-            title="User Stats" 
-            bordered={false} 
+          <Card
+            title={
+              <span style={{ color: darkTheme.text.primary }}>User Stats</span>
+            }
+            bordered={false}
             hoverable
-            style={{ backgroundColor: darkTheme.secondary }}
+            style={{
+              backgroundColor: darkTheme.secondary,
+              borderRadius: "12px",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
+            }}
+            headStyle={{
+              backgroundColor: darkTheme.secondary,
+              borderBottom: `1px solid ${darkTheme.border}`
+            }}
           >
             <Row>
               <Col span={24}>
@@ -140,7 +195,9 @@ const Dashboard = () => {
                       {userStatsData.map((entry, index) => (
                         <Cell
                           key={`cell-${index}`}
-                          fill={index === 0 ? darkTheme.accent : darkTheme.border}
+                          fill={
+                            index === 0 ? darkTheme.accent : darkTheme.border
+                          }
                         />
                       ))}
                     </Pie>
@@ -149,7 +206,11 @@ const Dashboard = () => {
                 </PieResponsiveContainer>
               </Col>
             </Row>
-            <Row>
+            <Row style={{ 
+              marginTop: "16px",
+              color: darkTheme.text.secondary,
+              fontSize: "0.9rem"
+            }}>
               <Col span={12}>
                 Total Users: {dashboardData?.userStats?.totalUsers}
               </Col>
@@ -162,25 +223,67 @@ const Dashboard = () => {
 
         {/* Revenue Stats Card with Bar Chart */}
         <Col xs={24} sm={12} lg={8}>
-          <Card 
-            title="Revenue Stats" 
-            bordered={false} 
+          <Card
+            title={
+              <span style={{ color: darkTheme.text.primary }}>Revenue Stats</span>
+            }
+            bordered={false}
             hoverable
-            style={{ backgroundColor: darkTheme.secondary }}
+            style={{
+              backgroundColor: darkTheme.secondary,
+              borderRadius: "12px",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
+            }}
+            headStyle={{
+              backgroundColor: darkTheme.secondary,
+              borderBottom: `1px solid ${darkTheme.border}`
+            }}
           >
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={revenueData}>
-                <CartesianGrid strokeDasharray="3 3" stroke={darkTheme.border} />
-                <XAxis dataKey="name" stroke={darkTheme.text.secondary} />
-                <YAxis stroke={darkTheme.text.secondary} />
-                <Tooltip 
-                  contentStyle={{ backgroundColor: darkTheme.secondary }}
-                />
-                <Legend />
-                <Bar dataKey="revenue" fill={darkTheme.accent} />
-              </BarChart>
-            </ResponsiveContainer>
-            <Row>
+            <div style={{ width: '100%', height: '300px' }}>
+              <ResponsiveContainer>
+                <BarChart data={revenueData}>
+                  <CartesianGrid
+                    strokeDasharray="3 3"
+                    stroke={darkTheme.border}
+                  />
+                  <XAxis 
+                    dataKey="name" 
+                    stroke={darkTheme.text.secondary}
+                    tick={{ fill: darkTheme.text.secondary }}
+                  />
+                  <YAxis 
+                    stroke={darkTheme.text.secondary}
+                    tick={{ fill: darkTheme.text.secondary }}
+                  />
+                  <Tooltip
+                    contentStyle={{ 
+                      backgroundColor: darkTheme.secondary,
+                      border: `1px solid ${darkTheme.border}`,
+                      borderRadius: '4px'
+                    }}
+                    labelStyle={{ color: darkTheme.text.primary }}
+                    itemStyle={{ color: darkTheme.text.secondary }}
+                  />
+                  <Legend 
+                    wrapperStyle={{ 
+                      color: darkTheme.text.secondary 
+                    }}
+                  />
+                  <Bar 
+                    dataKey="revenue" 
+                    fill={darkTheme.accent}
+                    radius={[4, 4, 0, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <Row 
+              style={{ 
+                marginTop: "16px",
+                color: darkTheme.text.secondary,
+                fontSize: "0.9rem"
+              }}
+            >
               <Col span={12}>
                 Total Revenue: ${dashboardData?.revenue?.totalRevenue}
               </Col>
@@ -203,15 +306,39 @@ const Dashboard = () => {
             </ul>
           </Card>
         </Col>
-      </Row>
 
-      {/* Recent Orders Section */}
-      <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
+        {/* Recent Orders Section */}
         <Col span={24}>
-          <Card title="Recent Orders" bordered={false} hoverable>
-            <ul>
+          <Card
+            title={
+              <span style={{ color: darkTheme.text.primary }}>Recent Orders</span>
+            }
+            bordered={false}
+            hoverable
+            style={{
+              backgroundColor: darkTheme.secondary,
+              borderRadius: "12px",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
+            }}
+            headStyle={{
+              backgroundColor: darkTheme.secondary,
+              borderBottom: `1px solid ${darkTheme.border}`
+            }}
+          >
+            <ul style={{ 
+              listStyle: "none", 
+              padding: 0,
+              color: darkTheme.text.secondary 
+            }}>
               {dashboardData?.recentOrders?.map((order) => (
-                <li key={order.id}>
+                <li 
+                  key={order.id}
+                  style={{
+                    padding: "12px",
+                    borderBottom: `1px solid ${darkTheme.border}`,
+                    fontSize: "0.9rem"
+                  }}
+                >
                   Order ID: {order.id} | Customer: {order.customer} | Product:{" "}
                   {order.product} | Amount: ${order.amount} | Date: {order.date}
                 </li>

@@ -1,5 +1,8 @@
-import { Layout, Menu } from "antd";
-import { Link } from "react-router-dom";
+import { Layout, Menu, Button, Avatar, Dropdown } from "antd";
+import { Link,  useLocation, useNavigate } from "react-router-dom";
+import { darkTheme } from "../theme/colors";
+import { useUser } from "../hooks/useUser";
+import { UserOutlined } from "@ant-design/icons";
 
 const { Header } = Layout;
 
@@ -8,39 +11,146 @@ const { Header } = Layout;
  * Uses Ant Design's Layout and Menu components for consistent styling.
  */
 const Navbar = () => {
-  const menuItems = [
+  const location = useLocation();
+  const { user, logout } = useUser();
+  const navigate = useNavigate();
+
+  const userMenuItems = [
     {
-      label: <Link to="/dashboard">Home</Link>,
-      key: "1",
+      key: "logout",
+      label: <span onClick={logout}>Logout</span>,
     },
     {
-      label: <Link to="/">Login</Link>,
-      key: "2",
+      key: "login",
+      label: <span onClick={() => navigate("/")}>Login</span>,
+    },
+  ];
+
+  const menuItems = [
+    {
+      label: <Link to="/dashboard">Dashboard</Link>,
+      key: "/dashboard",
     },
   ];
 
   return (
-    <Layout>
-      <Header style={{ background: "#333", padding: 0, position: "relative" }}>
+    <Header
+      style={{
+        background: darkTheme.secondary,
+        padding: "0 24px",
+        position: "sticky",
+        top: 0,
+        zIndex: 1000,
+        boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        height: "64px",
+      }}
+    >
+      <Link
+        to={user ? "/dashboard" : "/"}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+        }}
+      >
         <div
           style={{
-            float: "left",
-            color: "white",
-            fontSize: "20px",
-            marginLeft: "20px",
+            color: darkTheme.accent,
+            fontSize: "24px",
+            fontWeight: "bold",
+            letterSpacing: "0.5px",
           }}
         >
           Dashboard
         </div>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={["1"]}
-          items={menuItems}
-          style={{ lineHeight: "64px", float: "right" }}
-        />
-      </Header>
-    </Layout>
+      </Link>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "24px",
+        }}
+      >
+        {user ? (
+          <>
+            <Menu
+              mode="horizontal"
+              selectedKeys={[location.pathname]}
+              items={menuItems}
+              style={{
+                background: "transparent",
+                border: "none",
+                minWidth: "120px",
+              }}
+              theme="dark"
+            />
+            <Dropdown
+              menu={{ items: userMenuItems }}
+              placement="bottomRight"
+              trigger={["click"]}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  cursor: "pointer",
+                  padding: "4px 8px",
+                  borderRadius: "6px",
+                  transition: "background-color 0.3s",
+                  ":hover": {
+                    backgroundColor: darkTheme.primary,
+                  },
+                }}
+              >
+                <Avatar
+                  style={{
+                    backgroundColor: darkTheme.accent,
+                    color: darkTheme.text.primary,
+                  }}
+                  icon={<UserOutlined />}
+                />
+                <span
+                  style={{
+                    color: darkTheme.text.primary,
+                    fontSize: "14px",
+                  }}
+                >
+                  {user.name}
+                </span>
+              </div>
+            </Dropdown>
+          </>
+        ) : (
+          <Menu
+            mode="horizontal"
+            selectedKeys={[location.pathname]}
+            items={[
+              {
+                label: <Link to="/">Login</Link>,
+                key: "/",
+              },
+              {
+                label: <Link to="/signup">Sign Up</Link>,
+                key: "/signup",
+              },
+            ]}
+            style={{
+              background: "transparent",
+              border: "none",
+              minWidth: "200px",
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+            theme="dark"
+          />
+        )}
+      </div>
+    </Header>
   );
 };
 
