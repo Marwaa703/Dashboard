@@ -6,7 +6,6 @@ A comprehensive full-stack dashboard application featuring a **React.js frontend
 
 ## Features
 
-- **Interactive Dashboard:** Visualize data using responsive charts and tables.
 - **User Authentication:** Secure login/logout functionality.
 - **Dynamic Data Visualization:** Includes bar charts, pie charts, and detailed statistics.
 - **Responsive Design:** Ensures optimal performance on various devices.
