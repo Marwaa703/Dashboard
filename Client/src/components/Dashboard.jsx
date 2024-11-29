@@ -20,6 +20,7 @@ import {
   Tooltip as PieTooltip,
   ResponsiveContainer as PieResponsiveContainer,
 } from "recharts";
+import { darkTheme } from '../theme/colors';
 
 const { Title } = Typography;
 
@@ -95,10 +96,14 @@ const Dashboard = () => {
     : [];
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px", backgroundColor: darkTheme.primary }}>
       <Row gutter={[16, 16]}>
         <Col span={24}>
-          <Card title="Welcome to the Dashboard" bordered={false}>
+          <Card 
+            title="Welcome to the Dashboard" 
+            bordered={false}
+            style={{ backgroundColor: darkTheme.secondary }}
+          >
             <Row justify="space-between" align="middle">
               <Col>
                 <Title level={4}>Hello, {user.name}!</Title>
@@ -116,7 +121,12 @@ const Dashboard = () => {
       <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
         {/* User Stats Card with Pie Chart */}
         <Col xs={24} sm={12} lg={8}>
-          <Card title="User Stats" bordered={false} hoverable>
+          <Card 
+            title="User Stats" 
+            bordered={false} 
+            hoverable
+            style={{ backgroundColor: darkTheme.secondary }}
+          >
             <Row>
               <Col span={24}>
                 <PieResponsiveContainer width="100%" height={200}>
@@ -125,12 +135,12 @@ const Dashboard = () => {
                       data={userStatsData}
                       dataKey="value"
                       outerRadius={80}
-                      fill="#ff5b00"
+                      fill={darkTheme.accent}
                     >
                       {userStatsData.map((entry, index) => (
                         <Cell
                           key={`cell-${index}`}
-                          fill={index === 0 ? "#ff5b00" : "#ccc"}
+                          fill={index === 0 ? darkTheme.accent : darkTheme.border}
                         />
                       ))}
                     </Pie>
@@ -152,15 +162,22 @@ const Dashboard = () => {
 
         {/* Revenue Stats Card with Bar Chart */}
         <Col xs={24} sm={12} lg={8}>
-          <Card title="Revenue Stats" bordered={false} hoverable>
+          <Card 
+            title="Revenue Stats" 
+            bordered={false} 
+            hoverable
+            style={{ backgroundColor: darkTheme.secondary }}
+          >
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={revenueData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" stroke={darkTheme.border} />
+                <XAxis dataKey="name" stroke={darkTheme.text.secondary} />
+                <YAxis stroke={darkTheme.text.secondary} />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: darkTheme.secondary }}
+                />
                 <Legend />
-                <Bar dataKey="revenue" fill="#ff5b00" />
+                <Bar dataKey="revenue" fill={darkTheme.accent} />
               </BarChart>
             </ResponsiveContainer>
             <Row>

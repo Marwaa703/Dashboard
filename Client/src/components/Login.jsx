@@ -3,6 +3,7 @@ import { Form, Input, Button, message, Typography } from "antd";
 import { useNavigate, Link } from "react-router-dom";
 import { login as apiLogin } from "../utils/auth";
 import { useUser } from "../hooks/useUser.js";
+import { darkTheme } from '../theme/colors';
 
 const { Text } = Typography;
 
@@ -41,7 +42,7 @@ const Login = () => {
 
   return (
     <div className="login-form-container">
-      <h2>Login</h2>
+      <h2 style={{ color: darkTheme.text.primary }}>Login</h2>
       <Form name="login" onFinish={onFinish} layout="vertical">
         <Form.Item
           label="Email"
