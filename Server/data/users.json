@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1732841177176",
+    "name": "User",
+    "email": "user@gmail.com",
+    "password": "$2b$10$AI0JBJthZuDfoqwDBU7dJ.9.HK44JpB5f5veTjT5MEjP1pKrTcCsm"
+  },
+  {
+    "id": "1732845239060",
+    "name": "usertwo",
+    "email": "usertwo@gmail.com",
+    "password": "$2b$10$O0F1PMbwOJRDsOlsR4IZ/.l7y2ePBxE1i5b.Imw0/Ca3psHi/rHLu"
+  }
+]

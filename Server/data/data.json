@@ -1,0 +1,46 @@
+{
+  "userStats": {
+    "totalUsers": 1200,
+    "activeUsers": 890,
+    "inactiveUsers": 310
+  },
+  "revenue": {
+    "totalRevenue": 345000,
+    "dailyRevenue": 1200,
+    "monthlyRevenue": 35000
+  },
+  "topProducts": [
+    { "name": "Product A", "sold": 450 },
+    { "name": "Product B", "sold": 420 },
+    { "name": "Product C", "sold": 350 },
+    { "name": "Product D", "sold": 300 },
+    { "name": "Product E", "sold": 290 },
+    { "name": "Product F", "sold": 250 },
+    { "name": "Product G", "sold": 200 },
+    { "name": "Product H", "sold": 190 },
+    { "name": "Product I", "sold": 150 }
+  ],
+  "recentOrders": [
+    {
+      "id": 1,
+      "customer": "John Doe",
+      "product": "Product A",
+      "amount": 120,
+      "date": "2024-11-28"
+    },
+    {
+      "id": 2,
+      "customer": "Jane Smith",
+      "product": "Product B",
+      "amount": 60,
+      "date": "2024-11-27"
+    },
+    {
+      "id": 3,
+      "customer": "Alice Johnson",
+      "product": "Product C",
+      "amount": 80,
+      "date": "2024-11-26"
+    }
+  ]
+}
