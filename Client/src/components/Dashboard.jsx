@@ -126,10 +126,6 @@ const Dashboard = () => {
               borderRadius: "12px",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             }}
-            headStyle={{
-              backgroundColor: darkTheme.secondary,
-              borderBottom: `1px solid ${darkTheme.border}`,
-            }}
           >
             <Row justify="space-between" align="middle">
               <Col>
