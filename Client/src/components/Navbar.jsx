@@ -4,7 +4,7 @@ import { darkTheme } from "../theme/colors";
 import { useUser } from "../hooks/useUser";
 import { UserOutlined, MenuOutlined } from "@ant-design/icons";
 import { useState } from "react";
-//responsiveness
+
 
 const { Header } = Layout;
 
