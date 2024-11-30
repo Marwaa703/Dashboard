@@ -80,7 +80,7 @@ const Navbar = () => {
         onClick={() => setMobileMenuVisible(!mobileMenuVisible)}
         style={{
           display: "none",
-          "@media (max-width: 768px)": {
+          "@media (maxWidth: 768px)": {
             display: "none",
           },
         }}
@@ -91,7 +91,7 @@ const Navbar = () => {
           display: "flex",
           alignItems: "center",
           gap: "24px",
-          "@media (max-width: 768px)": {
+          "@media (maxWidth: 768px)": {
             display: mobileMenuVisible ? "flex" : "none",
             position: "absolute",
             top: "64px",
