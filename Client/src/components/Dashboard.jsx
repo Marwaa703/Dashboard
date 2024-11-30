@@ -3,8 +3,8 @@ import { Card, Row, Col, Spin, Typography } from "antd";
 import { useUser } from "../hooks/useUser.js";
 import { getData } from "../utils/data.js";
 import {
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -97,12 +97,15 @@ const Dashboard = () => {
       ]
     : [];
 
-  const revenueData = dashboardData?.revenue?.trends
-    ? dashboardData.revenue.trends.map((item) => ({
-        name: item.date,
-        revenue: item.amount,
-      }))
-    : [];
+  // Transform the data for the line chart
+  const chartData = [
+    { name: "Total Revenue", value: dashboardData?.revenue?.totalRevenue || 0 },
+    { name: "Daily Revenue", value: dashboardData?.revenue?.dailyRevenue || 0 },
+    {
+      name: "Monthly Revenue",
+      value: dashboardData?.revenue?.monthlyRevenue || 0,
+    },
+  ];
 
   return (
     <div
@@ -151,7 +154,6 @@ const Dashboard = () => {
               <span style={{ color: darkTheme.text.primary }}>User Stats</span>
             }
             bordered={false}
-            hoverable
             style={{
               backgroundColor: darkTheme.secondary,
               borderRadius: "12px",
@@ -203,7 +205,7 @@ const Dashboard = () => {
           </Card>
         </Col>
 
-        {/* Revenue Stats Card with Bar Chart */}
+        {/* Revenue Stats Card with Line Chart */}
         <Col xs={24} sm={12} lg={8}>
           <Card
             title={
@@ -212,7 +214,6 @@ const Dashboard = () => {
               </span>
             }
             bordered={false}
-            hoverable
             style={{
               backgroundColor: darkTheme.secondary,
               borderRadius: "12px",
@@ -225,7 +226,10 @@ const Dashboard = () => {
           >
             <div style={{ width: "100%", height: "300px" }}>
               <ResponsiveContainer>
-                <BarChart data={revenueData}>
+                <LineChart
+                  data={chartData}
+                  margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                >
                   <CartesianGrid
                     strokeDasharray="3 3"
                     stroke={darkTheme.border}
@@ -253,12 +257,15 @@ const Dashboard = () => {
                       color: darkTheme.text.secondary,
                     }}
                   />
-                  <Bar
-                    dataKey="revenue"
-                    fill={darkTheme.accent}
-                    radius={[4, 4, 0, 0]}
+                  <Line
+                    type="monotone"
+                    dataKey="value"
+                    stroke={darkTheme.accent}
+                    strokeWidth={2}
+                    dot={{ fill: darkTheme.accent }}
+                    activeDot={{ r: 8 }}
                   />
-                </BarChart>
+                </LineChart>
               </ResponsiveContainer>
             </div>
             <Row

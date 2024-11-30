@@ -21,14 +21,22 @@ const Navbar = () => {
   const userMenuItems = [
     {
       key: "logout",
-      label: <span onClick={logout}>Logout</span>,
+      label: (
+        <span
+          onClick={() => {
+            logout();
+            navigate("/");
+          }}
+        >
+          Logout
+        </span>
+      ),
     },
     {
       key: "login",
       label: <span onClick={() => navigate("/")}>Login</span>,
     },
   ];
-
 
   return (
     <Header
